@@ -818,7 +818,3 @@ function TemSTBack() {
 function OpenHtml(htmlPath) {
 	window.location=htmlPath;
 }
-
-function Test() {
-	
-}
