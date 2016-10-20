@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LED广告编辑系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="../JavaScript/CookieJS.js"></script> 
+<script type="text/javascript" src="../JavaScript/Share.js"></script> 
+<script type="text/javascript" src="../JavaScript/GroupManger.js"></script> 
+</head>
+<body>
+<div id="groupDiv" data-role="page">
+	<div data-role="header">		
+		<a href="#" onclick="goBack('../HTML/Main.html','#m-user')" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">返回</a>	
+		 <h1>分组管理</h1>       
+		  <a href="#CreatGrpDiv"  class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-notext">新建</a>      
+	</div>
+	
+	<div data-role="popup" id="groupDiv_Message"> 
+	</div>
+	
+	<div data-role="main" class="ui-content">	
+	<ul id='GrpList' data-role="listview" data-inset="true">
+	</ul>	
+	</div>
+</div>
+
+<div id="CreatGrpDiv" data-role="page">
+	<div data-role="header">		
+		<a href="#groupDiv" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">返回</a>	
+		 <h1>新建分组</h1>            
+	</div>
+	
+	<div data-role="popup" id="CreatGrpDiv_Message"> 
+	</div>
+	
+	<div data-role="main" class="ui-content">
+		<div style="margin-bottom:10px">
+			<input id="GrpName" placeholder="分组名称" style="width:100%;height:30px">
+		</div>		
+		<a href="#"  class="ui-btn ui-corner-all ui-shadow"  onclick="CreatGrp()">创建</a>
+	</div>
+</div>
+
+<div id="EditGrpDiv" data-role="page">
+	<div data-role="header">		
+		<a href="#groupDiv" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">返回</a>	
+		 <h1>编辑分组</h1>       
+		 <a href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext" onclick="DeleteGrp()">删除</a>     
+	</div>
+	
+	<div data-role="popup" id="EditGrpDiv_Message"> 
+	</div>
+	
+	<div data-role="main" class="ui-content">
+		<div style="margin-bottom:10px">
+			<input id="EGrpName" placeholder="分组名称" style="width:100%;height:30px">
+		</div>		
+		<a href="#"  class="ui-btn ui-corner-all ui-shadow"  onclick="EditGrp()">修改</a>
+	</div>
+</div>
+</body>
+</html>

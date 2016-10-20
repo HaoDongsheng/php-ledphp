@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LED广告编辑系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="../JavaScript/CookieJS.js"></script> 
+<script type="text/javascript" src="../JavaScript/Share.js"></script> 
+<script type="text/javascript" src="../JavaScript/Main.js"></script> 
+</head>
+<body>
+	
+<div id="AdvListDiv" data-role="page">
+	<div data-role="header">
+			<a href="#" class="ui-btn ui-corner-all ui-icon-user ui-btn-icon-notext">主页</a>
+			 <h1>广告列表</h1>
+			 <a href="#CreatAdvDiv"  class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-notext">新建</a> 
+			 <div data-role="popup" id="dialog_menu"  class="ui-content">
+			 	<div data-role="controlgroup" data-type="vertical">			      
+			      <a href="#" class="ui-btn ui-btn-icon-left ui-icon-delete" onclick="deleteInfo()">删除</a>
+			      <a href="#" class="ui-btn ui-btn-icon-left ui-icon-action" onclick="copyInfo()">复制</a>
+			      <a href="#" class="ui-btn ui-btn-icon-left ui-icon-check" onclick="auditInfo()">审核</a>
+			      <a href="#" class="ui-btn ui-btn-icon-left ui-icon-cloud" onclick="publishInfo()">发布</a>			      
+			    </div>
+			 </div>     
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+		<ul>
+		<li><a href="javascript:void(0)" onclick="showItem('#m-drafts')"  data-icon="info">草稿箱</a></li>
+		<li><a href="javascript:void(0)" onclick="showItem('#m-audit')"  data-icon="check">已审核</a></li>
+		<li><a href="javascript:void(0)" onclick="showItem('#m-publish')"  data-icon="mail">已发布</a></li>
+		<li><a href="javascript:void(0)"  onclick="showItem('#m-user')"  data-icon="user" >我的</a></li>
+		</ul>
+		</div>
+    </div>
+    <div data-role="popup" id="AdvListDiv_Message" data-history="false"> 
+	</div>
+	<div id="items" data-role="main" class="ui-content">
+			<div id="m-drafts" class="m-item">			 				
+			</div>
+			<div id="m-audit" class="m-item" style="display:none">
+			</div>
+			<div id="m-publish" class="m-item" style="display:none">
+			</div>
+			<div id="m-user" class="m-item" style="display:none">
+				<ul data-role="listview" data-inset="true">
+				 <li>
+			        <a href="#" onclick="OpenHtml('../HTML/infoRecycleBin.html')">
+			         <!--<img src="firefox.png">-->
+			        <h2>回收站</h2>
+			        <p>用于已删除广告和过期广告的管理。</p>
+			        </a>
+			      </li>
+			      <li>
+			        <a href="#">
+			         <!--<img src="firefox.png">-->
+			        <h2>终端管理</h2>
+			        <p>用于管理车辆信息，修改车牌号，分组等等。</p>
+			        </a>
+			      </li>
+			      <li>
+			        <a href="#" onclick="OpenHtml('../HTML/GroupManger.html')">
+			         <!--<img src="firefox.png">-->
+			        <h2>分组管理</h2>
+			        <p>用于车辆分组的增删改查等功能。</p>
+			        </a>
+			      </li>
+			      <li>
+			        <a href="#" onclick="OpenHtml('../HTML/TemplateManger.html')">
+			         <!--<img src="firefox.png">-->
+			        <h2>模板管理</h2>
+			        <p>用于广告排期模板的增删改查。</p>
+			        </a>
+			      </li>
+			      <li>
+			        <a href="#" onclick="OpenHtml('../HTML/adminManger.html')">
+			         <!--<img src="firefox.png">-->
+			        <h2>用户管理</h2>
+			        <p>用于修改用户密码等信息。</p>
+			        </a>
+			      </li>
+			    </ul>
+			</div>
+	</div>
+</div>
+
+<div id="CreatAdvDiv" data-role="page">
+	<div data-role="header">		
+		<a href="#AdvListDiv" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">返回</a>	
+		 <h1>新建广告</h1>            
+	</div>
+	
+	<div data-role="popup" id="CreatAdvDiv_Message"> 
+	</div>
+	
+	<div data-role="main" class="ui-content">
+		<div style="margin-bottom:10px">
+					<input id="infoName" placeholder="广告名称" style="width:100%;height:30px">
+				</div>
+				<div>
+					<fieldset data-role="fieldcontain">
+					<select id="advType" style="width:100%;height:30px">
+					<option>转场信息</option>
+					<option selected="selected">普通广告</option>
+					<option>通知信息</option>
+					</select>
+					</fieldset>					 
+				</div>
+				<div>
+					<fieldset data-role="fieldcontain">
+					<select id="GrpList" style="width:100%;height:30px">					
+					</select>
+					</fieldset>					 
+				</div>
+				<div>
+					<input id="dtStart" type="date" placeholder="2016-05-01" style="width:100%;height:30px">
+				</div>
+				<div>
+					<input id="dtEnd" type="date" placeholder="2016-05-01" style="width:100%;height:30px">
+				</div>				
+				<a href="#"  class="ui-btn ui-corner-all ui-shadow"  onclick="CreatAdv()">创建</a>
+	</div>
+</div>
+
+<div id="ItemDiv" data-role="page">
+	<div data-role="header">		
+		<a href="#AdvListDiv" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left" onclick="SaveinfoDB()">返回</a>	
+		 <h1>广告详情</h1>            
+		 <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-notext" onclick="AddItem()">添加</a>		 
+	</div>
+	<div data-role="popup" id="ItemDiv_Message"> 
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+		<ul>
+		<li><a href="javascript:void(0)" onclick="showItem('#imgList')"  data-icon="comment">内容</a></li>
+		<li><a href="javascript:void(0)" onclick="showItem('#m-ST')" data-icon="clock">排期</a></li>		
+		</ul>
+		</div>
+    </div>
+	<div data-role="main" class="ui-content">
+		<div id="imgList" class="m-item">
+		</div>
+		<div id="m-ST" class="m-item">
+			<img id="ImgTemST" alt="" src="">
+		</div>
+	</div>
+</div>  
+
+<div id="ItemEdit" data-role="page">
+	<div data-role="header">		
+		<a href="#ItemDiv" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left" onclick="SaveItem()">返回</a>	
+		 <h1>广告编辑</h1>            
+		 <a href="#ItemDiv" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext" onclick="DeleteItem()">删除</a>
+	</div>
+	<div data-role="popup" id="ItemEdit_Message"> 
+	</div>
+		<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+		<ul>
+		<li><a href="javascript:void(0)" onclick="showItem('#Div-itemTxt')"  data-icon="comment">编辑内容</a></li>
+		<li><a href="javascript:void(0)" onclick="showItem('#Div-itemAttribute')" data-icon="clock">编辑属性</a></li>		
+		</ul>
+		</div>
+    </div>
+	<div data-role="main" class="ui-content">	
+	 	<div id="Div-itemAttribute" class="m-item">
+      	<table style="width:100%">
+      	<tr>
+      	<td>位置</td>
+      	<td><input type="number" id="itemleft" value="8" min="0" max="128" step="8"/></td>
+      	<td><input type="number" id="itemtop" value="8" min="0" max="16" step="8"/></td>
+      	</tr>
+      	<tr>
+      	<td>大小</td>
+      	<td><input type="number" id="itemwidth" value="128" min="0" max="128" step="8"/></td>
+      	<td><input type="number" id="itemheight" value="16" min="0" max="16" step="8"/></td>
+      	</tr>
+      	<tr>
+      	<tr>
+      	<td>播放次数</td>
+      	<td colspan='2'><input type="range" id="playClc" value="1" min="1" max="10"/></td>
+      	</tr>
+      	<tr>
+      	<td>显示模式</td>
+      	<td><select id="displayMode"  onchange=selectChange(this)>
+		  	<option value="../Content/Img/静止.gif">静止</option>
+		  	<option value="../Content/Img/左滚动.gif">左滚动</option>
+		  	<option value="../Content/Img/上滚动.gif">上滚动</option>
+		  	<option value="../Content/Img/左移进.gif">左移进</option>	  	
+			</select></td>
+		<td><img id="img1" src="../Content/Img/左滚动.gif"></td>
+      	</tr>
+      	<tr>
+      	<td>播放速度</td>
+      	<td colspan='2'><input type="range" id="speedID" value="5" min="0" max="10"/></td>
+      	</tr>
+      	<tr>
+      	<td>最终停留</td>
+      	<td><select id="stayMode" data-role="slider">
+      		<option value="0" selected="selected">否</option>
+         	<option value="1">是</option>          
+        </select></td>
+      	</tr>
+      	<tr>
+      	<td>停留时间</td>
+      	<td colspan='2'><input type="range" id="stayTime" value="0" min="0" max="600" step="0.01"/></td>
+      	</tr>
+      	<tr>
+      	<td>滚动间隔</td>
+      	<td colspan='2'><input type="range" id="rollSpace" value="0" min="0" max="16"/></td>
+      	</tr>
+      	</table>
+		</div>
+			
+		<div id="Div-itemTxt" class="m-item">
+		<!-- 加载编辑器的容器 -->
+	    <script id="container" style="width: 100%" type="text/plain">
+    	</script>
+	    <!-- 配置文件 -->
+	    <script type="text/javascript" src="../Content/utf8-php/ueditor.config.js"></script>
+	    <!-- 编辑器源码文件 -->
+	    <script type="text/javascript" src="../Content/utf8-php/ueditor.all.js"></script>
+	    <!-- 实例化编辑器 
+	    <script type="text/javascript">
+	        var ue = UE.getEditor('container');
+	    </script>-->
+		
+	    </div>
+	</div>
+</div>
+
+<div id="TemSTEdit" data-role="page">
+	<div data-role="header">		
+		<a href="#ItemDiv" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left" onclick="TemSTBack()">返回</a>	
+		 <h1>广告编辑</h1>            
+	</div>
+	<div data-role="popup" id="TemSTEdit_Message"> 
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+		<ul>
+		<li><a href="javascript:void(0)" onclick="showItem('#Div-TemST')"  data-icon="comment">排期列表</a></li>
+		<li><a href="javascript:void(0)" onclick="showItem('#Div-TemplateList')" data-icon="clock">模板列表</a></li>		
+		</ul>
+		</div>
+    </div>
+	<div data-role="main" class="ui-content">	
+	 	<div  id="Div-TemplateList" class="m-item">
+    	<fieldset id="field-TemList" data-role="controlgroup">    
+      	</fieldset>
+		</div>
+			
+		<div id="Div-TemST" class="m-item">
+   			<ul id="m-list-TemST" data-role="listview" data-inset="true">      		
+			</ul>	 		       	
+	    </div>
+	</div>
+</div>
+
+</body>
+</html>

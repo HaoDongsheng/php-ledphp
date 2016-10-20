@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LED广告编辑系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="../JavaScript/CookieJS.js"></script> 
+<script type="text/javascript" src="../JavaScript/Share.js"></script> 
+<script type="text/javascript" src="../JavaScript/recycleBin.js"></script> 
+</head>
+<body>
+<div id="recycleBinDiv" data-role="page">
+	<div data-role="header">		
+		<a href="#" onclick="goBack('../HTML/Main.html','#m-user')" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">返回</a>	
+	 	<h1>回收站</h1>       
+	</div>
+	
+	<div data-role="footer" data-position="fixed">
+		<a href="#" id='previousPage'  class="ui-btn ui-btn-left ui-corner-all ui-icon-arrow-l ui-btn-icon-left">上一页</a>	
+	 	<h1 id='pageNo'>1/10</h1>       
+	  	<a href="#" id='nextPage' class="ui-btn ui-btn-right ui-corner-all ui-icon-arrow-r ui-btn-icon-left">下一页</a>      
+    </div>
+	<div data-role="popup" id="recycleBinDiv_Message"> 
+	</div>
+	
+	<div data-role="popup" id="DeleteDiv_Message"> 
+		<h3>删除确认</h3>
+	    <p>是否删除当前广告？</p>
+	    <a href="#" onclick="deleteInfo()" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-icon-check ui-btn-icon-left ui-btn-inline ui-mini" data-rel="back">确定</a>
+	    <a href="#" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-inline ui-mini" data-rel="back">取消</a>
+	</div>
+	
+	<div data-role="main" class="ui-content">	
+	<form class="ui-filterable">
+      <input id="myFilter" data-type="search">
+    </form>
+    <ul id="infoList" data-role="listview" data-filter="true" data-input="#myFilter" data-inset="true">     
+    </ul>	
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LED广告编辑系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="../JavaScript/CookieJS.js"></script> 
+<script type="text/javascript" src="../JavaScript/Share.js"></script> 
+<script type="text/javascript" src="../JavaScript/TemplateManger.js"></script> 
+</head>
+<body>
+<div id="TemplateDiv" data-role="page">
+	<div data-role="header">		
+		<a href="#" onclick="goBack('../HTML/Main.html','#m-user')" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">返回</a>	
+		 <h1>模板管理</h1>       
+		  <a href="#CreatTemplateDiv" onclick="openCreat()"  class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-notext">新建</a>    
+	</div>
+	
+	<div data-role="popup" id="TemplateDiv_Message"> 
+	</div>
+	
+	<div data-role="main" class="ui-content">	
+	<div id='templateMain'></div>
+	</div>
+</div>
+
+<div id="CreatTemplateDiv" data-role="page">
+	<div data-role="header">		
+		<a href="#TemplateDiv" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">返回</a>	
+		 <h1 id='temTitle'>新建模板</h1>            
+		 <a id='delTem' href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext" onclick="DeleteTem()">删除</a>     
+	</div>
+	
+	<div data-role="popup" id="CreatTemplateDiv_Message"> 
+	</div>
+	
+	
+	<div data-role="popup" id="addTemTp_popup" data-position-to="window">
+	  <input id="dtStart" type="time" placeholder="0:00:00" style="width:100%;height:30px">
+	  <input id="dtEnd" type="time" placeholder="0:00:00" style="width:100%;height:30px">
+	  <a href="#CreatTemplateDiv"  class="ui-btn ui-corner-all ui-shadow"  onclick="addTemTp()">添加</a>
+	</div>
+	
+	<div data-role="main" class="ui-content">
+		<div style="margin-bottom:10px">
+			<input id="TemplateName" placeholder="模板名称" style="width:100%;height:30px">
+		</div>		
+		<div>
+			<fieldset data-role="fieldcontain">
+			<select id="GrpList" style="width:100%;height:30px">					
+			</select>
+			</fieldset>					 
+		</div>
+		<div>
+			<input id="TemplateCycle"  type="range" name="points" value="300" min="5" max="3600" step="5" data-show-value="true" data-highlight="true">			
+		</div>
+		<div>
+			  <ul id="TemplateTpList" data-role="listview" data-inset="true">
+		      	<li data-role="divider"><a>模板时间段集合</a><a href="#addTemTp_popup" data-rel="popup" data-icon='plus' >添加</a></li>
+		      </ul>          
+        </div>
+		<a href="#"  class="ui-btn ui-corner-all ui-shadow"  onclick="CreatTemplate()">确定</a>
+	</div>
+</div>
+
+</body>
+</html>

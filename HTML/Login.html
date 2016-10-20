@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LED广告编辑系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="../JavaScript/CookieJS.js"></script> 
+<script type="text/javascript" src="../JavaScript/Login.js"></script> 
+
+</head>
+<body>
+	<div  data-role="page">
+		<div data-role="header">
+		    <h1>LED广告编辑系统</h1>
+		  </div>
+       
+		<div  data-role="main" class="ui-content">
+			<div style="margin-bottom:10px">			
+				<input id="UserName"  placeholder="用户名" >
+			</div>
+			<div>
+				<input id="pwd"  type="password" placeholder="密码" >
+			</div>
+			<div>
+				<a href="javascript:login()" class="ui-btn ui-corner-all ui-shadow">登录</a>  
+			</div>			
+		</div>		
+		
+		<div data-role="popup" id="popupMessage"> 
+		</div>
+		<div data-role="footer" data-position="fixed">
+		    <h1>LED广告编辑系统</h1>
+		  </div>
+	</div>
+</body>
+</html>
