@@ -17,4 +17,23 @@ function PopupMessage(strMessage,DivID) {
 function showItem(id){
 	$('div.m-item').hide();
 	$(id).show();
+	
+	switch(id)
+	{
+		case '#m-drafts':{
+			$('#auditInfo').show();
+			$('#publishInfo').hide();
+			$('#creatAdv').show();
+		};break;
+		case '#m-audit':{
+			$('#auditInfo').hide();
+			$('#publishInfo').show();
+			$('#creatAdv').hide();
+		};break;
+		case '#m-publish':{
+			$('#auditInfo').hide();
+			$('#publishInfo').hide();
+			$('#creatAdv').hide();
+		};break;
+	}
 }

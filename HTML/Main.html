@@ -18,13 +18,13 @@
 	<div data-role="header">
 			<a href="#" class="ui-btn ui-corner-all ui-icon-user ui-btn-icon-notext">主页</a>
 			 <h1>广告列表</h1>
-			 <a href="#CreatAdvDiv"  class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-notext">新建</a> 
+			 <a id='creatAdv' href="#CreatAdvDiv"  class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-notext">新建</a> 
 			 <div data-role="popup" id="dialog_menu"  class="ui-content">
 			 	<div data-role="controlgroup" data-type="vertical">			      
-			      <a href="#" class="ui-btn ui-btn-icon-left ui-icon-delete" onclick="deleteInfo()">删除</a>
-			      <a href="#" class="ui-btn ui-btn-icon-left ui-icon-action" onclick="copyInfo()">复制</a>
-			      <a href="#" class="ui-btn ui-btn-icon-left ui-icon-check" onclick="auditInfo()">审核</a>
-			      <a href="#" class="ui-btn ui-btn-icon-left ui-icon-cloud" onclick="publishInfo()">发布</a>			      
+			      <a id="deleteInfo" href="#" class="ui-btn ui-btn-icon-left ui-icon-delete" onclick="deleteInfo()">删除</a>
+			      <a id="copyInfo" href="#" class="ui-btn ui-btn-icon-left ui-icon-action" onclick="copyInfo()">复制</a>
+			      <a id="auditInfo" href="#" class="ui-btn ui-btn-icon-left ui-icon-check" onclick="auditInfo()">审核</a>
+			      <a id="publishInfo" href="#" style="display: none;" class="ui-btn ui-btn-icon-left ui-icon-cloud" onclick="publishInfo()">发布</a>			      
 			    </div>
 			 </div>     
 	</div>

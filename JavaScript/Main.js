@@ -113,9 +113,9 @@ function initList() {
 									var advType="普通广告";
 									switch(advTypeID)
 									{
-									case 1:advType="转场信息";break;
-									case 2:advType="普通广告";break;
-									case 3:advType="通知信息";break;
+										case 1:advType="转场信息";break;
+										case 2:advType="普通广告";break;
+										case 3:advType="通知信息";break;
 									}									
 									AddList(ADID,infoName,advType,dtStart,dtEnd,ulName);
 						    	}
@@ -127,13 +127,7 @@ function initList() {
 		}
 	});
 }
-//显示界面切换
-/*
-function showItem(id){
-	$('div.m-item').hide();
-	$(id).show();
-}
-*/
+
 //新建广告
 function CreatAdv() {	
 	var infoName=$("#infoName").val();
@@ -219,7 +213,34 @@ function deleteInfo() {
 }
 //复制广告
 function copyInfo() {
-	alert("复制"+selectADID);
+	CloseDialog("dialog_menu");
+	var url = "../PHP/copyInfoToDB.php";
+	data={
+			ADID:selectADID
+	};
+	$.ajax({  
+		type: "post",  
+		url: url,  
+		dataType: "json",  
+		data:data,
+		error: function(){  
+			PopupMessage('错误来自/PHP/copyInfoToDB.php','AdvListDiv_Message');
+        },  
+		success: function(respsone){			
+			if(respsone!=null)
+				{
+				if(respsone.msg=="OK")
+					{
+					AddList(respsone.ADID,respsone.infoName,respsone.advType,respsone.dtStart,respsone.dtEnd,'uld'+respsone.GrpID);
+					$('#uld'+respsone.GrpID).listview('refresh');
+					var itemCount = parseInt($('#spand'+respsone.GrpID).html());
+					$('#spand'+respsone.GrpID).html(itemCount+1);
+					}
+				else{PopupMessage(respsone.msg,'AdvListDiv_Message');}
+				}
+			else{PopupMessage('错误来自/PHP/copyInfoToDB.php','AdvListDiv_Message');}
+		}
+	});	
 }
 //审核广告
 function auditInfo() {
