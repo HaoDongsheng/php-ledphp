@@ -55,7 +55,6 @@ $(function () {
 	 $("#Div-TemplateList").on("swiperight",function(){
 		 showItem("#Div-TemST");
 		});
-	 
 	});
 
 //列表初始化
@@ -400,13 +399,43 @@ function openItem(ADID) {
 			 if(respsone.length>0)
 				 {
 				///*
-				 $("#imgList").empty();
+				 	$("#imgList").empty();
 				 	for(var i=0;i<respsone.length;i++)
 				 	{
 				 		var Scale = parseInt($(document.body).width()/128);				 			
 				 		var imgID="A"+ADID+"P"+respsone[i].pageName+"I"+respsone[i].ItemName;
-				 		 var arrayItem =ParseHtml(respsone[i].texts);
-				 		 var JsonStr =JSON.stringify(arrayItem);
+				 		var arrayItem =ParseHtml(respsone[i].texts);		
+				 		var itemW=128*Scale;
+				 		var itemH=16*Scale;
+						
+				 		var canvas="<canvas id='"+imgID+"' width='"+itemW+"' height='"+itemH+"'></canvas>";	
+				 		$("#imgList").append(canvas);
+				 		
+				 		$("#"+imgID).on("taphold",function(event){		
+				 			var imgSID = event.target.id.toString();
+				 			selectADID= imgSID.substring(imgSID.indexOf('A') + 1, imgSID.indexOf('P'));
+				 			selectPn = imgSID.substring(imgSID.indexOf('P') + 1, imgSID.indexOf('I'));
+				 			selectIn = imgSID.substring(imgSID.indexOf('I') + 1, imgSID.length);
+				 			
+				 			window.location.href="#ItemEdit";		
+				 			showItem("#Div-itemTxt");
+				 			EditItem();
+							  });
+				 		
+				 		var arrImg =GetArrayImgs(arrayItem);
+				 		
+				 		dataSrc={
+				 				canvasID:imgID,
+				 				width:128,
+				 				height:16,
+				 				Scale:Scale,
+				 				arrImg:arrImg
+				 		};
+				 		
+				 		setTimeout(DrawItem,50,dataSrc)
+				 		
+				 		/* 
+				 		var JsonStr =JSON.stringify(arrayItem);				 		 				 		
 				 		var myDate = new Date();
 				 		var imgSrc = "../PHP/DrawImage.php?ADID="+ADID+"&pageName="+respsone[i].pageName+"&itemName="+respsone[i].ItemName+"&Size=128,16&Scale="+Scale+"&Data="+window.encodeURIComponent(JsonStr)+"&time="+myDate;				 		
 				 		var img="<img id='"+imgID+"'  src='"+imgSrc+"'/>";				 		
@@ -422,9 +451,10 @@ function openItem(ADID) {
 				 			showItem("#Div-itemTxt");
 				 			EditItem();
 							  });
+						  */
 				 	}
 				 	var mySTDate = new Date();				 	
-			 		var imgSTSrc = "../PHP/DrawTemST.php?srceenW="+parseInt($(document.body).width())+"&ADID="+ADID+"&time="+myDate;				 		
+			 		var imgSTSrc = "../PHP/DrawTemST.php?srceenW="+parseInt($(document.body).width())+"&ADID="+ADID+"&time="+mySTDate;				 		
 			 		$("#ImgTemST").attr("src",imgSTSrc);
 			 		ImgSTClick();
 			 		$("#ImgTemST").on("taphold",function(event){
@@ -432,7 +462,7 @@ function openItem(ADID) {
 			 			initTemSTData();
 						  });
 			 		//*/
-			 		//window.location="../PHP/Test.php?ADID="+ADID;
+			 		//window.location="../PHP/Test.php?ADID="+ADID;			 					 		
 				 }
 			 else{PopupMessage('广告条目数为0','ItemDiv_Message');}
 		 }
@@ -519,6 +549,7 @@ function DeleteItem() {
 					 {PopupMessage('错误来自/PHP/DeleteItem.php'+respsone.msg,'ItemDiv_Message');}
 			 }
 			 else{PopupMessage('读取广告异常','ItemDiv_Message');}
+			 showItem('#imgList');
 			}
 		});
 }
@@ -558,10 +589,26 @@ function SaveItem() {
 					    var JsonStr =JSON.stringify(arrayItem);
 
 						var imgID="A"+selectADID+"P"+selectPn+"I"+selectIn;
-						var Scale = parseInt($(document.body).width()/128);		
+						var Scale = parseInt($(document.body).width()/128);	
+						var itemW=128*Scale;
+				 		var itemH=16*Scale;
+				 		
+				 		var arrImg =GetArrayImgs(arrayItem);
+				 		
+				 		dataSrc={
+				 				canvasID:imgID,
+				 				width:128,
+				 				height:16,
+				 				Scale:Scale,
+				 				arrImg:arrImg
+				 		};
+				 		
+				 		setTimeout(DrawItem,50,dataSrc);
+						/*
 						var myDate = new Date();
 						var imgSrc="../PHP/DrawImage.php?ADID="+selectADID+"&pageName="+selectPn+"&itemName="+selectIn+"&Size=128,16&Scale="+Scale+"&Data="+window.encodeURIComponent(JsonStr)+"&time="+myDate;
 						$("#" +imgID).attr("src",imgSrc);
+						*/
 
 					 }
 				 PopupMessage('保存成功!','ItemDiv_Message');
@@ -589,6 +636,35 @@ function AddItem() {
 		 		var Scale = parseInt($(document.body).width()/128);
 		 		var imgID="A"+selectADID+"P"+respsone.pageName+"I"+respsone.ItemName;
 		 		 var arrayItem =ParseHtml(respsone.texts);
+		 		var itemW=128*Scale;
+		 		var itemH=16*Scale;
+				
+		 		var canvas="<canvas id='"+imgID+"' width='"+itemW+"' height='"+itemH+"'></canvas>";	
+		 		$("#imgList").append(canvas);
+		 		
+		 		$("#"+imgID).on("taphold",function(event){		
+		 			var imgSID = event.target.id.toString();
+		 			selectADID= imgSID.substring(imgSID.indexOf('A') + 1, imgSID.indexOf('P'));
+		 			selectPn = imgSID.substring(imgSID.indexOf('P') + 1, imgSID.indexOf('I'));
+		 			selectIn = imgSID.substring(imgSID.indexOf('I') + 1, imgSID.length);
+		 			
+		 			window.location.href="#ItemEdit";		
+		 			showItem("#Div-itemTxt");
+		 			EditItem();
+					  });
+		 		
+		 		var arrImg =GetArrayImgs(arrayItem);
+		 		
+		 		dataSrc={
+		 				canvasID:imgID,
+		 				width:128,
+		 				height:16,
+		 				Scale:Scale,
+		 				arrImg:arrImg
+		 		};
+		 		
+		 		setTimeout(DrawItem,50,dataSrc);
+		 		 /*
 		 		 var JsonStr =JSON.stringify(arrayItem);
 		 		var myDate = new Date();
 		 		var imgSrc = "../PHP/DrawImage.php?ADID="+selectADID+"&pageName="+respsone.pageName+"&itemName="+respsone.ItemName+"&Size=128,16&Scale="+Scale+"&Data="+window.encodeURIComponent(JsonStr)+"&time="+myDate;				 		
@@ -604,7 +680,8 @@ function AddItem() {
 		 			window.location.href="#ItemEdit";		
 		 			showItem("#Div-itemTxt");
 		 			EditItem();
-					  });		 		
+					  });		
+				  */ 		
 		 }
 		 else{PopupMessage('读取广告异常','ItemDiv_Message');}
 		}
@@ -635,17 +712,18 @@ function SaveinfoDB() {
 }
 //解析html文本
 function ParseHtml(strHtml) {
+	var strHtml=strHtml.replace(/(\n)+|(\r\n)+/g, "");
 	 var root = UE.htmlparser(strHtml, true);
 	 var arrNode = new Array();
 	 for(var i=0;i<root.children.length;i++)
 		 {
 		 		var node=root.children[i];
-		 		fontName='宋体';fontSize=12;
+		 		fontName='宋体';fontSize=16;
 		 		arrNode.push(ParseNode(node));
 		 }	 
 	 return arrNode;
 }
-var fontName='宋体';var fontSize=12;
+var fontName='宋体';var fontSize=16;
 function ParseNode(node) {
 	var arrNode = new Array()
 	for(var i=0;i<node.children.length;i++)
@@ -686,7 +764,7 @@ function ParseNode(node) {
 	 				arrNode.push(data);
 	 			};break;
 	 			default:{
-	 				if(node.tagName=='p'){fontName='宋体';fontSize=12;}
+	 				if(node.tagName=='p'){fontName='宋体';fontSize=16;}
 	 				var data={
 	 						fontName:fontName,
 	 						fontSize:fontSize,
